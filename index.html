@@ -65,7 +65,7 @@
             font-size: 1.2rem;
             color: white;
             margin-top: 10px;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            text-shadow:  1px 3px rgba(0, 0, 0, 0.5);
         }
 
         .clock-container {
@@ -75,7 +75,7 @@
             backdrop-filter: blur(10px);
             border-radius: 15px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1 solid rgba(255, 255, 255, 0.15);
             width: 90%;
             max-width: 800px;
             margin-bottom: 25px;
@@ -329,7 +329,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .location-tab:hover {
+        .locationab:hover {
             background: rgba(79, 140, 201, 0.5);
             transform: translateY(-3px);
         }
@@ -391,6 +391,84 @@
             padding: 8px;
             font-size: 0.85rem;
             text-align: center;
+        }
+
+        .donate-container {
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: center;
+            width: 90%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            transition: all 0.4s ease;
+        }
+
+        .donate-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .donate-title {
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 8px rgba(255, 215, 0, 0.6);
+        }
+
+        .qrcode-row {
+            display: flex; /* 使用Flexbox布局 */
+            justify-content: space-between; /* 等间距分布 */
+            gap: 30px; /* 二维码之间的间距 */
+            max-width: 500px;
+            margin: 0 auto 20px;
+        }
+
+        .donate-item {
+            flex: 1; /* 等分空间 */
+            text-align: center;
+        }
+
+        .donate-qr {
+            margin: 0 auto;
+            width: 200px;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .donate-qr:hover {
+            transform: scale(1.05);
+        }
+
+        .donate-qr img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .donate-label {
+            margin-top: 12px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .donate-text {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .donate-highlight {
+            color: #FFD700;
+            font-weight: 500;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
         }
 
         .footer {
@@ -551,6 +629,16 @@
                 font-size: 2rem;
                 bottom: 20px;
             }
+
+            .qrcode-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .donate-qr {
+                width: 180px;
+                height: 180px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -569,6 +657,15 @@
             .locations-tabs {
                 flex-direction: column;
                 align-items: center;
+            }
+
+            .donate-title {
+                font-size: 1.5rem;
+            }
+
+            .donate-qr {
+                width: 150px;
+                height: 150px;
             }
         }
     </style>
@@ -605,6 +702,33 @@
         <div class="locations-tabs" id="locationsTabs"></div>
         <div class="locations-content" id="locationsContent"></div>
     </div>
+    
+    <div class="donate-container">
+        <h2 class="donate-title">支持创作</h2>
+        <div class="qrcode-row"> <!-- 双二维码容器 -->
+            <!-- 第一个付款码 -->
+            <div class="donate-item">
+                <div class="donate-qr">
+                    <img src="https://s2.loli.net/2025/07/05/eIf4BtHr3WXRqTy.jpg" alt="支付宝收款码">
+                </div>
+                <p class="donate-label">支付宝扫码</p>
+            </div>
+            
+            <!-- 第二个付款码 -->
+            <div class="donate-item">
+                <div class="donate-qr">
+                    <img src="https://s2.loli.net/2025/07/05/MhKcOubAwCYk35a.jpg" alt="微信收款">
+                </div>
+                <p class="donate-label">微信扫码</p>
+            </div>
+        </div>
+        
+        <p class="donate-text">
+            感谢使用BOSS位置查看助手！如果这个网站对您有帮助，<br>
+            欢迎<span class="donate-highlight">扫描上方二维码</span>支持作者继续开发。<br>
+            您的支持将帮助我持续改进、维护网站，并添加更多实用功能！
+        </p>
+    </div>
 
     <div class="footer">Jay © 2025 | 数据每日轮换</div>
 
@@ -616,7 +740,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-
             function updateDateTime() {
                 const now = new Date();
                 const weekdays = ['日', '一', '二', '三', '四', '五', '六'];
@@ -817,6 +940,8 @@
                 container.innerHTML = '';
 
                 bossData.forEach((bossId, index) => {
+                    if(index >= BOSS_NAMES.length) return;
+                    
                     const bossName = BOSS_NAMES[index];
                     const imgUrl = BOSS_IMAGES[bossName];
 
@@ -828,7 +953,7 @@
                     img.alt = bossName;
                     img.className = 'boss-image';
 
-                    img.onerror = function () {
+                    img.onerror = function() {
                         this.onerror = null;
                         this.src = 'https://s2.loli.net/2025/07/01/BhVL2pm3wK1AiOS.png';
                         this.style.backgroundColor = '#2c3e50';
@@ -838,7 +963,7 @@
                         this.innerHTML = '<div style="color:#ecf0f1;font-size:24px">⚠️</div>';
                     };
 
-                    bossBlock.addEventListener('click', function () {
+                    bossBlock.addEventListener('click', function() {
                         openFullscreen(imgUrl, bossName);
                     });
 
@@ -870,7 +995,7 @@
                     const galleryItem = document.createElement('div');
                     galleryItem.className = 'gallery-item';
 
-                    galleryItem.addEventListener('click', function () {
+                    galleryItem.addEventListener('click', function() {
                         openFullscreen(item.image, item.name);
                     });
 
@@ -879,7 +1004,7 @@
                     img.src = item.image;
                     img.alt = item.name;
 
-                    img.onerror = function () {
+                    img.onerror = function() {
                         this.onerror = null;
                         this.src = 'https://s2.loli.net/2025/07/01/BhVL2pm3wK1AiOS.png';
                     };
@@ -919,7 +1044,7 @@
                     tab.textContent = bossName;
                     tab.dataset.boss = bossName;
 
-                    tab.addEventListener('click', function () {
+                    tab.addEventListener('click', function() {
                         document.querySelectorAll('.location-tab').forEach(t => t.classList.remove('active'));
                         document.querySelectorAll('.location-content').forEach(c => c.classList.remove('active'));
 
@@ -941,31 +1066,33 @@
                     const imagesContainer = document.createElement('div');
                     imagesContainer.className = 'location-images';
 
-                    BOSS_LOCATIONS[bossName].forEach((location, idx) => {
-                        const locationDiv = document.createElement('div');
-                        locationDiv.className = 'location-image';
+                    if(BOSS_LOCATIONS[bossName]) {
+                        BOSS_LOCATIONS[bossName].forEach((location, idx) => {
+                            const locationDiv = document.createElement('div');
+                            locationDiv.className = 'location-image';
 
-                        const img = document.createElement('img');
-                        img.src = location.image;
-                        img.alt = `位置${idx + 1}`;
+                            const img = document.createElement('img');
+                            img.src = location.image;
+                            img.alt = `位置${idx + 1}`;
 
-                        img.onerror = function () {
-                            this.onerror = null;
-                            this.src = 'https://s2.loli.net/2025/07/01/BhVL2pm3wK1AiOS.png';
-                        };
+                            img.onerror = function() {
+                                this.onerror = null;
+                                this.src = 'https://s2.loli.net/2025/07/01/BhVL2pm3wK1AiOS.png';
+                            };
 
-                        img.addEventListener('click', function () {
-                            openFullscreen(location.image, `${bossName} - ${location.desc}`);
+                            img.addEventListener('click', function() {
+                                openFullscreen(location.image, `${bossName} - ${location.desc}`);
+                            });
+
+                            const desc = document.createElement('div');
+                            desc.className = 'image-desc';
+                            desc.textContent = location.desc;
+
+                            locationDiv.appendChild(img);
+                            locationDiv.appendChild(desc);
+                            imagesContainer.appendChild(locationDiv);
                         });
-
-                        const desc = document.createElement('div');
-                        desc.className = 'image-desc';
-                        desc.textContent = location.desc;
-
-                        locationDiv.appendChild(img);
-                        locationDiv.appendChild(desc);
-                        imagesContainer.appendChild(locationDiv);
-                    });
+                    }
 
                     content.appendChild(imagesContainer);
                     contentContainer.appendChild(content);
@@ -976,12 +1103,13 @@
                 fullscreenImage.src = imageUrl;
                 bossNameFullscreen.textContent = bossName;
                 fullscreenOverlay.classList.add('active');
-
+                document.body.style.overflow = 'hidden';
                 document.addEventListener('keydown', handleEscKey);
             }
 
             function closeFullscreenHandler() {
                 fullscreenOverlay.classList.remove('active');
+                document.body.style.overflow = '';
                 document.removeEventListener('keydown', handleEscKey);
             }
 
@@ -993,7 +1121,7 @@
 
             closeFullscreen.addEventListener('click', closeFullscreenHandler);
             fullscreenOverlay.addEventListener('click', closeFullscreenHandler);
-            fullscreenImage.addEventListener('click', function (event) {
+            fullscreenImage.addEventListener('click', function(event) {
                 event.stopPropagation();
             });
 
