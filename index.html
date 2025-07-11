@@ -10,7 +10,7 @@
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border;
+            box-sizing: border-box;
             font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
         }
 
@@ -556,6 +556,161 @@
             backdrop-filter: blur(5px);
         }
 
+        /* 鱼重评级系统样式 */
+        .weight-rating-system {
+            margin: 30px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            max-width: 800px;
+            position: relative;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: #a3b1d5;
+        }
+
+        .slider-range {
+            margin-left: 25px;
+            margin-right: 25px;
+
+            background: rgba(10, 15, 35, 0.7);
+            border-radius: 8px;
+            height: 14px;
+            position: relative;
+            margin-bottom: 35px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .slider-filled {
+            height: 100%;
+            width: 65%;
+            background: linear-gradient(90deg, #00f0ff, #0066ff);
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        .slider-thumb {
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 28px;
+            height: 28px;
+            background: #ffdb58;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid #fff;
+            box-shadow: 0 0 15px rgba(255, 235, 0, 0.7);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .slider-thumb:hover {
+            transform: translate(-50%, -50%) scale(1.15);
+            box-shadow: 0 0 20px rgba(255, 235, 0, 0.9);
+        }
+
+        .value-box {
+            position: absolute;
+            top: -85px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.3rem;
+            min-width: 120px;
+            text-align: center;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .value-box::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: rgba(255, 255, 255, 0.6) transparent transparent transparent;
+        }
+
+        .stars-container {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 5px;
+        }
+
+        .star {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .star.active {
+            color: #ffdb58;
+            text-shadow: 0 0 8px rgba(255, 219, 88, 0.8);
+        }
+
+        .weight-value {
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            font-weight: 600;
+        }
+
+        .slider-ticks {
+            margin-left: 25px;
+            margin-right: 25px;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            top: -22px;
+        }
+
+        .tick {
+            position: relative;
+            width: 2px;
+            height: 12px;
+            background: rgba(168, 198, 255, 0.3);
+        }
+
+        .tick.main {
+            height: 16px;
+            background: rgba(168, 198, 255, 0.6);
+        }
+
+        .tick::after {
+            content: attr(data-value);
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            color: #a3b1d5;
+            white-space: nowrap;
+        }
+
+        .rating-title {
+            font-size: 1.5rem;
+            color: #FFD700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -697,12 +852,12 @@
     </div>
 
     <div class="gallery-container">
-        <div class="gallery-title">BOSS点位图</div>
+        <div class="gallery-title">BOSS点位区域</div>
         <div class="gallery-grid" id="galleryGrid"></div>
     </div>
 
     <div class="locations-container">
-        <div class="locations-title">BOSS详细位置</div>
+        <div class="locations-title">BOSS二手情报</div>
         <div class="locations-tabs" id="locationsTabs"></div>
         <div class="locations-content" id="locationsContent"></div>
     </div>
@@ -721,7 +876,7 @@
                 <div class="donate-qr">
                     <img src="https://s2.loli.net/2025/07/11/Y7yXChklTZmGPKW.jpg" alt="微信收款">
                 </div>
-                <p class="donate-label">微信扫码</>
+                <p class="donate-label">微信扫码</p>
             </div>
         </div>
 
@@ -780,6 +935,18 @@
                 document.getElementById('timeDisplay').textContent = `${hours} : ${minutes} : ${seconds}`;
                 document.getElementById('weekdayDisplay').textContent = `星期 ${weekday}`;
             }
+
+            // BOSS重量范围配置（每个BOSS不同）
+            const BOSS_WEIGHTS = {
+                "Shredder": { min: 150, max: 200 },
+                "Bessie": { min: 200, max: 500 },
+                "Don Pedro": { min: 850, max: 1400 },
+                "Kraken": { min: 200, max: 500 },
+                "Bunyip": { min: 75, max: 200 },
+                "Nessie": { min: 250, max: 350 },
+                "Naga": { min: 1000, max: 3000 },
+                "Boiuna": { min: 1000, max: 3000 }
+            };
 
             const BOSS_DATA = [
                 [1, 1, 3, 3, 3, 1, 3, 3],
@@ -1054,6 +1221,166 @@
                 });
             }
 
+            // 初始化BOSS鱼重评级系统
+            function initWeightRatingSystem(bossName) {
+                const weightConfig = BOSS_WEIGHTS[bossName];
+                const min = weightConfig.min;
+                const max = weightConfig.max;
+                const initialPercentage = 50;
+                const initialWeight = Math.round(min + (max - min) * (initialPercentage / 100));
+
+                const systemId = `weight-rating-${bossName.replace(/\s+/g, '-')}`;
+                const weightRatingContainer = document.getElementById(systemId);
+                if (!weightRatingContainer) return;
+
+                weightRatingContainer.innerHTML = `
+                    <div class="slider-header">
+                        <span>最小: ${min}kg</span>
+                        <span>最大: ${max}kg</span>
+                    </div>
+                    
+                    <div class="slider-range">
+                        <div class="slider-filled" id="sliderFilled-${systemId}">
+                            <div class="slider-thumb" id="sliderThumb-${systemId}"></div>
+                        </div>
+                        <div class="value-box" id="valueBox-${systemId}">
+                            <div class="stars-container" id="starsContainer-${systemId}">
+                                <div class="star">★</div>
+                                <div class="star">★</div>
+                                <div class="star">★</div>
+                                <div class="star">★</div>
+                                <div class="star">★</div>
+                            </div>
+                            <div class="weight-value">${initialWeight}kg</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-ticks">
+                        <div class="tick main" data-value="${min}"></div>
+                        <div class="tick" data-value="${Math.round(min + (max - min) * 0.2)}"></div>
+                        <div class="tick main" data-value="${Math.round(min + (max - min) * 0.4)}"></div>
+                        <div class="tick" data-value="${Math.round(min + (max - min) * 0.6)}"></div>
+                        <div class="tick main" data-value="${Math.round(min + (max - min) * 0.8)}"></div>
+                        <div class="tick" data-value="${max}"></div>
+                    </div>
+                `;
+
+                // 设置初始滑块位置
+                const sliderFilled = document.getElementById(`sliderFilled-${systemId}`);
+                sliderFilled.style.width = `${initialPercentage}%`;
+
+                const valueBox = document.getElementById(`valueBox-${systemId}`);
+                valueBox.style.left = `${initialPercentage}%`;
+
+                // 初始化滑块交互
+                initSliderInteraction(systemId, min, max);
+            }
+
+            // 初始化滑块交互逻辑（关键修复）
+            function initSliderInteraction(systemId, min, max) {
+                const sliderThumb = document.getElementById(`sliderThumb-${systemId}`);
+                const sliderFilled = document.getElementById(`sliderFilled-${systemId}`);
+                const sliderRange = sliderFilled.parentElement;
+                const valueBox = document.getElementById(`valueBox-${systemId}`);
+                const weightValue = valueBox.querySelector('.weight-value');
+                const starsContainer = document.getElementById(`starsContainer-${systemId}`);
+                const stars = starsContainer.querySelectorAll('.star');
+
+                let isDragging = false;
+                let startX, startPercentage;
+
+                // 鼠标按下事件处理
+                sliderThumb.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    const rect = sliderRange.getBoundingClientRect();
+                    startX = e.clientX;
+                    startPercentage = parseFloat(sliderFilled.style.width) || 0;
+
+                    document.body.style.cursor = 'grabbing';
+                    sliderThumb.style.transform = 'translate(-50%, -50%) scale(1.2)';
+                    sliderThumb.style.boxShadow = '0 0 20px rgba(255, 235, 0, 1)';
+
+                    e.preventDefault();
+                });
+
+                // 鼠标移动事件处理（修复边界问题）
+                document.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+
+                    const rect = sliderRange.getBoundingClientRect();
+                    const deltaX = e.clientX - startX;
+                    const percentageDelta = (deltaX / rect.width) * 100;
+                    let newPercentage = startPercentage + percentageDelta;
+
+                    // 关键修复：确保在0-100%范围内
+                    newPercentage = Math.max(0, Math.min(100, newPercentage));
+
+                    sliderFilled.style.width = newPercentage + '%';
+                    updateValue(newPercentage, min, max, weightValue, valueBox, stars);
+
+                    e.preventDefault();
+                });
+
+                // 鼠标释放事件处理
+                document.addEventListener('mouseup', () => {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    document.body.style.cursor = 'default';
+                    sliderThumb.style.transform = 'translate(-50%, -50%)';
+                    sliderThumb.style.boxShadow = '0 0 15px rgba(255, 235, 0, 0.7)';
+                });
+
+                // 滑块点击功能（修复边界问题）
+                sliderRange.addEventListener('click', (e) => {
+                    const rect = sliderRange.getBoundingClientRect();
+                    let clickX = e.clientX - rect.left;
+
+                    // 关键修复：确保点击位置在轨道范围内
+                    clickX = Math.max(0, Math.min(rect.width, clickX));
+                    const percentage = (clickX / rect.width) * 100;
+
+                    sliderFilled.style.width = percentage + '%';
+                    updateValue(percentage, min, max, weightValue, valueBox, stars);
+                });
+            }
+
+            // 更新数值和星级
+            function updateValue(percentage, min, max, weightValue, valueBox, stars) {
+                const value = Math.round(min + (max - min) * (percentage / 100));
+                weightValue.textContent = value + 'kg';
+
+                // 更新位置
+                valueBox.style.left = percentage + '%';
+
+                // 更新星级
+                updateStars(value, min, max, stars);
+            }
+
+            // 更新星级显示（根据当前BOSS的重量范围动态计算）
+            function updateStars(value, min, max, stars) {
+                const range = max - min;
+                const starRanges = [
+                    min + range * 0.2,
+                    min + range * 0.4,
+                    min + range * 0.6,
+                    min + range * 0.8
+                ];
+
+                let starsCount = 1;
+                if (value >= starRanges[0]) starsCount = 2;
+                if (value >= starRanges[1]) starsCount = 3;
+                if (value >= starRanges[2]) starsCount = 4;
+                if (value >= starRanges[3]) starsCount = 5;
+
+                stars.forEach((star, index) => {
+                    if (index < starsCount) {
+                        star.classList.add('active');
+                    } else {
+                        star.classList.remove('active');
+                    }
+                });
+            }
+
             function renderBossLocations() {
                 const tabsContainer = document.getElementById('locationsTabs');
                 const contentContainer = document.getElementById('locationsContent');
@@ -1084,8 +1411,14 @@
                     if (index === 0) content.classList.add('active');
 
                     const title = document.createElement('h3');
-                    title.textContent = `${bossName} 详细位置参考`;
+                    title.textContent = `${bossName} 重量评级/点位参考`;
                     content.appendChild(title);
+
+                    // 添加鱼重评级系统容器
+                    const ratingSystem = document.createElement('div');
+                    ratingSystem.className = 'weight-rating-system';
+                    ratingSystem.id = `weight-rating-${bossName.replace(/\s+/g, '-')}`;
+                    content.appendChild(ratingSystem);
 
                     const imagesContainer = document.createElement('div');
                     imagesContainer.className = 'location-images';
@@ -1120,6 +1453,9 @@
 
                     content.appendChild(imagesContainer);
                     contentContainer.appendChild(content);
+
+                    // 初始化该BOSS的鱼重评级系统
+                    initWeightRatingSystem(bossName);
                 });
             }
 
