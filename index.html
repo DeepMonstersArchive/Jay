@@ -47,7 +47,7 @@
         .header {
             text-align: center;
             margin-bottom: 25px;
-            padding: 15px;
+            padding: 25px;
             width: 90%;
             max-width: 800px;
             background: rgba(0, 0, 0, 0.4);
@@ -73,7 +73,7 @@
 
         .clock-container {
             text-align: center;
-            padding: 30px;
+            padding: 25px;
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
             border-radius: 15px;
@@ -566,7 +566,7 @@
             }
         }
 
-        @media (max-width: 992px) {
+        @media (max-width: 800px) {
 
             .boss-blocks-container,
             .gallery-grid,
@@ -588,7 +588,7 @@
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 800px) {
             .header h1 {
                 font-size: 2.2rem;
             }
@@ -677,7 +677,8 @@
 <body>
     <div class="header">
         <h1>BOSS位置查看助手</h1>
-        <p>🍀钓鱼佬，先吃草!🍀</p>
+        <p>🍀记得吃草，然后耐心...🍀</p>
+        <p>🦜增加容错：黑色药水+怪物钓竿/老年人钓竿🦜</p>
     </div>
 
     <div class="clock-container">
@@ -688,7 +689,6 @@
 
     <div class="data-container">
         <div class="data-title">今日BOSS点位</div>
-        <!-- 修复此行：将 < class="boss-blocks-container" 改为 <div class="boss-blocks-container" -->
         <div class="boss-blocks-container" id="bossBlocks"></div>
         <div class="data-meta" id="dataMeta"></div>
         <div class="data-progress">
