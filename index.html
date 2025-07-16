@@ -49,22 +49,26 @@
             position: fixed;
             top: 20px;
             left: 20px;
-            z-index: 1001; /* 确保在最上层 */
-            pointer-events: none; /* 允许点击穿透 */
+            z-index: 1001;
+            /* 确保在最上层 */
+            pointer-events: none;
+            /* 允许点击穿透 */
         }
 
         .parrot {
             width: 150px;
             height: auto;
             animation: float 4s ease-in-out infinite alternate;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
-            pointer-events: auto; /* 鹦鹉可交互 */
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+            pointer-events: auto;
+            /* 鹦鹉可交互 */
         }
-        
+
         /* 对话气泡固定在鹦鹉右下角 */
         .speech-bubble {
             position: absolute;
-            top: 110%; /* 从鹦鹉底部开始 */
+            top: 110%;
+            /* 从鹦鹉底部开始 */
             left: 50%;
             background: white;
             border-radius: 25px;
@@ -72,45 +76,59 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             min-width: 300px;
             max-width: 80vw;
-            z-index: 1001; /* 确保在最上层 */
-            pointer-events: auto; /* 气泡可交互 */
+            z-index: 1001;
+            /* 确保在最上层 */
+            pointer-events: auto;
+            /* 气泡可交互 */
         }
-        
+
         /* 气泡箭头固定在左上角指向鹦鹉 */
         .speech-bubble::after {
             content: '';
             position: absolute;
             top: 0;
-            left: 20px; /* 从左侧开始 */
-            transform: translateY(-100%); /* 移到气泡上方 */
-            border-width: 0 15px 15px; /* 下箭头 */
+            left: 20px;
+            /* 从左侧开始 */
+            transform: translateY(-100%);
+            /* 移到气泡上方 */
+            border-width: 0 15px 15px;
+            /* 下箭头 */
             border-style: solid;
-            border-color: transparent transparent white transparent; /* 白色下箭头 */
+            border-color: transparent transparent white transparent;
+            /* 白色下箭头 */
         }
-        
+
         #quote {
             font-weight: bold;
             color: #333;
             line-height: 1.5;
             display: inline-block;
             transition: opacity 0.3s;
-            white-space: pre-wrap; /* 自动换行 */
-            word-wrap: break-word; /* 长单词换行 */
-            width: 100%; /* 确保宽度适应容器 */
+            white-space: pre-wrap;
+            /* 自动换行 */
+            word-wrap: break-word;
+            /* 长单词换行 */
+            width: 100%;
+            /* 确保宽度适应容器 */
         }
-        
+
         /* 字符动画容器 */
         .char-container {
             display: inline-block;
             transition: transform 0.2s;
         }
-        
+
         /* 浮动动画 */
         @keyframes float {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(-10px); }
+            0% {
+                transform: translateY(0px);
+            }
+
+            100% {
+                transform: translateY(-10px);
+            }
         }
-        
+
         /* 响应式布局 */
         @media (max-width: 800px) {
             .parrot-container {
@@ -121,12 +139,12 @@
                 width: 100%;
                 text-align: center;
             }
-            
+
             .parrot {
                 width: 120px;
                 margin: 0 auto;
             }
-            
+
             .speech-bubble {
                 position: relative;
                 top: auto;
@@ -135,7 +153,7 @@
                 max-width: 80vw;
                 transform: none;
             }
-            
+
             .speech-bubble::after {
                 top: -15px;
                 left: 50%;
@@ -149,14 +167,15 @@
         body.night-mode .speech-bubble {
             background: rgba(30, 30, 50, 0.9);
         }
-        
+
         body.night-mode .speech-bubble #quote {
             color: #fff;
         }
-        
+
         body.night-mode .speech-bubble::after {
-            border-color: transparent transparent rgba(30,30,50,0.9) transparent;
+            border-color: transparent transparent rgba(30, 30, 50, 0.9) transparent;
         }
+
         /* 鹦鹉容器 - 结束 */
 
         .header {
@@ -947,9 +966,8 @@
 <body>
     <!-- 鹦鹉容器 -->
     <div class="parrot-container">
-        <img src="https://s2.loli.net/2025/07/16/mKqcLfGVxdPUHQE.webp"
-             alt="鹦鹉" class="parrot">
-        
+        <img src="https://s2.loli.net/2025/07/16/mKqcLfGVxdPUHQE.webp" alt="鹦鹉" class="parrot">
+
         <!-- 对话气泡固定在鹦鹉右下角 -->
         <div class="speech-bubble">
             <div id="quote"></div>
@@ -1007,10 +1025,10 @@
         </div>
 
         <p class="donate-text">
-            感谢使用BOSS位置查看助手！如果这个网站对您有帮助，<br>
+            感谢使用BOSS位置查看助手!如果这个网站对您有帮助，<br>
             欢迎<span class="donate-highlight">扫描上方二维码</span>支持作者继续开发。<br>
             您的支持将帮助我持续改进、维护网站，并添加更多实用功能！<br>
-            特别鸣谢：<span class="donate-highlight"> 谨、亚马逊神秘捕蛇男 </span>等多位大佬（供图）！<br>
+            特别鸣谢：<span class="donate-highlight"> 谨、亚马逊神秘捕蛇男 </span>等多位大佬（供图）！
             <!-- 诚挚感谢：<span class="donate-highlight"> yizzz4 </span>大佬（赞助）！ -->
         </p>
     </div>
@@ -1027,7 +1045,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             // ============= 鹦鹉语录功能 =============
             const quotes = [
-                "诚挚感谢：阁楼微光、yizzz4等大佬友情赞助！！！",
+                "诚挚感谢: 阁楼微光、yizzz4等大佬友情赞助!!!",
                 "能在此相伴实属有幸。",
                 "所有钓鱼佬都爱吹牛，除你和我——但说真的，我对你都有点怀疑。",
                 "你能像电影里那样让船漂移吗？",
@@ -1037,31 +1055,69 @@
                 "这情绪起伏像极了采蘑菇时的心跳过山车！",
                 "富豪有心理医生，咱们普通人？唯有钓鱼解千愁！",
                 "授人以鱼管饱一天，授人以渔？——就等着看他在船上醉整天吧！",
-                "憋气30秒小菜一碟！",
+                "憋气30秒小菜一碟!",
                 "最近迷上《恐龙公园》神作，疯狂安利！",
                 "找到大鱼老巢的地方，必有掠食者蹲守。",
                 "遇见<Jay>真是太好啦。",
                 "最爱随便甩竿等惊喜——愿者上钩才刺激！",
-                "今天钓鱼佬扎堆，鱼怕不是要咬疯了！",                
-                "这儿木头也太多了伐？！"
+                "今天钓鱼佬扎堆，鱼怕不是要咬疯了！",
+                "这儿木头也太多了伐？！",
+                "湖里最吓人的是什么？水里突然碰你腿的东西，绝对是水怪！",
+                "钓到过骨鱼没？没钓到？说明你睡太早！",
+                "密报：孔雀螳螂虾昼伏夜出",
+                "美洲鳗专挑夜间猎食",
+                "河流入海口的冷水域鳟鱼成群",
+                "旗鱼这类大家伙常在东北部外海出没",
+                "阿拉斯加！蛮荒之地，得拿出原住民的强悍劲儿",
+                "见过帝王蟹吗？夜间限定捕捞！",
+                "搏战鲑鱼要等到黄昏时分",
+                "想看海象？东北角特定岛屿蹲守",
+                "法定禁止弄醒熊自拍——好笑在真有人干过！",
+                "Alaska源自原住民语Alyeska,意为'伟大国度'",
+                "大嘴杜父鱼仅夜间上钩",
+                "澳洲80%动物都是特有物种",
+                "考拉日均睡20小时,慕了",
+                "鳄鱼就爱暖和的岩石海岸",
+                "大堡礁——地球最大生态系统！",
+                "鲨鱼水域藏了什么鱼种？还不去探探！",
+                "儒艮看着圆滚滚，其实浑身腱子肉！",
+                "在澳大利亚的我们，现在算不算'脚朝上'?",
+                "官方认证！苏格兰国兽竟是——独角兽！",
+                "见过苏格兰人扔木杆吗？人家那可是正经比赛！",
+                "巨型墨鱼只在夜间出没",
+                "珊瑚礁区能找到昆士兰石斑鱼",
+                "泰国的稻田生态系统滋养着特有淡水鱼",
+                "湄公巨鲶——全球最大的淡水鱼王之一",
+                "泰国坐拥850种淡水鱼,生物宝库!",
+                "尼斯湖水怪？史前巨兽还是变异鳗？您猜~",
+                "千湖之国(他们管湖叫Loch!),鱼群多到数不清！",
+                "曼谷全称长到能当绕口令！",
+                "传说南方曾有座失落神庙",
+                "⚠️避开污染水接触！护具要穿牢！生物勿惊扰！",
+                "变异的只是外表，生灵仍守本心",
+                "泡过这水的人最后说：'你绝对想不到，这味道像...咳咳'",
+                "此地生机勃勃——直到爆炸改写一切",
+                "发光水痕=发光生物标记",
+                "钓变异鱼需特殊技巧"
             ];
-            
+
             const quoteElement = document.getElementById('quote');
-            let currentIndex = 0;
+            let currentIndex = Math.floor(Math.random() * quotes.length); // 初始随机索引
+            let lastIndex = -1; // 记录上一次的索引
             let typingTimer;
             let charIndex = 0;
             let currentText = "";
-            
+
             // 基础字号选项（两种预设）
             const baseFontSizes = [24, 28];
             // 当前选择的基准字号
             let currentBaseFontSize = baseFontSizes[0];
-            
+
             // 获取基准字号（随机选择一种）
             function getRandomBaseFontSize() {
                 return baseFontSizes[Math.floor(Math.random() * baseFontSizes.length)];
             }
-            
+
             // 获取字符随机大小（基于当前基准字号）
             function getRandomCharSize() {
                 // 在基准字号±30%范围内随机变化
@@ -1070,71 +1126,79 @@
                 const maxSize = currentBaseFontSize + variation;
                 return Math.floor(Math.random() * (maxSize - minSize + 1)) + minSize;
             }
-            
+
             // 创建字符元素
             function createCharElement(char) {
                 const charContainer = document.createElement('span');
                 charContainer.className = 'char-container';
-                
+
                 const charSpan = document.createElement('span');
                 charSpan.textContent = char;
-                
+
                 // 为每个字符设置随机大小
                 const fontSize = getRandomCharSize();
                 charSpan.style.fontSize = `${fontSize}px`;
                 charSpan.style.display = 'inline-block';
                 charSpan.style.transition = 'all 0.3s';
-                
+
                 // 添加轻微旋转和位置变化增强动态效果
                 const rotate = (Math.random() * 6) - 3; // -3°到3°
                 const translateY = (Math.random() * 5) - 2.5; // -2.5px到2.5px
                 charSpan.style.transform = `rotate(${rotate}deg) translateY(${translateY}px)`;
-                
+
                 charContainer.appendChild(charSpan);
                 return charContainer;
             }
-            
+
             // 打字机效果函数
             function typeWriter() {
                 if (charIndex < currentText.length) {
                     // 创建当前字符元素
                     const char = currentText.charAt(charIndex);
                     const charElement = createCharElement(char);
-                    
+
                     // 添加到显示区域
                     quoteElement.appendChild(charElement);
-                    
+
                     // 添加出现动画
                     setTimeout(() => {
                         charElement.style.opacity = '1';
                         charElement.style.transform = 'translateY(0)';
                     }, 10);
-                    
+
                     charIndex++;
                     typingTimer = setTimeout(typeWriter, 100); // 每个字符100ms
                 } else {
                     // 当前句子打字完成
-                    setTimeout(nextQuote, 10000); // 3秒后显示下一句
+                    setTimeout(nextQuote, 20000); // 10秒后显示下一句
                 }
             }
-            
+
             function nextQuote() {
                 // 清除当前打字效果
                 clearTimeout(typingTimer);
                 quoteElement.innerHTML = ''; // 清空当前内容
-                
-                // 更新文本
-                currentIndex = (currentIndex + 1) % quotes.length;
+
+                // 记录当前索引作为上一次的索引
+                lastIndex = currentIndex;
+
+                // 生成新的随机索引，确保不与上一次相同
+                let newIndex;
+                do {
+                    newIndex = Math.floor(Math.random() * quotes.length);
+                } while (newIndex === lastIndex && quotes.length > 1);
+
+                currentIndex = newIndex;
                 currentText = quotes[currentIndex];
                 charIndex = 0;
-                
+
                 // 随机选择新的基准字号
                 currentBaseFontSize = getRandomBaseFontSize();
-                
+
                 // 开始打字
                 typeWriter();
             }
-            
+
             // 初始加载鹦鹉语录
             currentBaseFontSize = getRandomBaseFontSize();
             currentText = quotes[currentIndex];
