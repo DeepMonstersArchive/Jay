@@ -49,6 +49,7 @@
             position: fixed;
             top: 20px;
             left: 20px;
+            max-width: 800px;
             z-index: 1001;
             /* 确保在最上层 */
             pointer-events: none;
@@ -71,11 +72,10 @@
             /* 从鹦鹉底部开始 */
             left: 50%;
             background: white;
-            border-radius: 25px;
+            border-radius: 15px;
             padding: 25px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            min-width: 300px;
-            max-width: 80vw;
+            min-width: 300px;            
             z-index: 1001;
             /* 确保在最上层 */
             pointer-events: auto;
@@ -87,15 +87,11 @@
             content: '';
             position: absolute;
             top: 0;
-            left: 20px;
-            /* 从左侧开始 */
-            transform: translateY(-100%);
-            /* 移到气泡上方 */
-            border-width: 0 15px 15px;
-            /* 下箭头 */
+            left: 20px;/* 从左侧开始 */
+            transform: translateY(-100%);/* 移到气泡上方 */
+            border-width: 0 15px 15px;/* 下箭头 */
             border-style: solid;
-            border-color: transparent transparent white transparent;
-            /* 白色下箭头 */
+            border-color: transparent transparent white transparent;/* 白色下箭头 */
         }
 
         #quote {
@@ -136,7 +132,8 @@
                 top: auto;
                 left: auto;
                 margin: 0 auto 20px;
-                width: 100%;
+                width: 90%;
+                /*自适应宽度，很关键的修改**************************************************/
                 text-align: center;
             }
 
@@ -149,18 +146,22 @@
                 position: relative;
                 top: auto;
                 left: auto;
+                width: 100%;
+                min-width: 300px;
+                /*最小宽度，很关键的修改**************************************************/
                 margin: 20px auto 0;
-                max-width: 80vw;
                 transform: none;
             }
 
             .speech-bubble::after {
-                top: -15px;
+                top: -14px;/*修改小三角高度位置*/
                 left: 50%;
                 transform: translateX(-50%);
                 border-width: 0 15px 15px;
+                border-style: solid;
                 border-color: transparent transparent white transparent;
             }
+
         }
 
         /* 日夜模式适配 */
@@ -259,6 +260,33 @@
             margin-bottom: 25px;
             text-shadow: 0 2px 8px rgba(79, 172, 254, 0.4);
             letter-spacing: 1px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .collapse-btn {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+            padding: 0 10px;
+            cursor: pointer;
+        }
+
+        .collapse-btn.collapsed {
+            transform: rotate(180deg);
+        }
+
+        .content-container {
+            transition: all 0.4s ease;
+            overflow: hidden;
+            max-height: 3000px; /* 初始高度足够显示所有内容 */
+        }
+
+        .content-container.collapsed {
+            max-height: 0;
+            opacity: 0;
+            pointer-events: none;
         }
 
         .boss-blocks-container {
@@ -371,6 +399,10 @@
             color: white;
             margin-bottom: 25px;
             text-shadow: 0 2px 8px rgba(79, 172, 254, 0.4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
         }
 
         .gallery-grid {
@@ -446,6 +478,10 @@
             color: white;
             margin-bottom: 25px;
             text-shadow: 0 2px 8px rgba(79, 172, 254, 0.4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
         }
 
         .locations-tabs {
@@ -987,23 +1023,35 @@
     </div>
 
     <div class="data-container">
-        <div class="data-title">今日BOSS点位</div>
-        <div class="boss-blocks-container" id="bossBlocks"></div>
-        <div class="data-meta" id="dataMeta"></div>
-        <div class="data-progress">
-            <div class="data-progress-inner" id="dataProgress"></div>
+        <div class="data-title">今日BOSS点位
+            <span class="collapse-btn">▼</span>
+        </div>
+        <div class="content-container">
+            <div class="boss-blocks-container" id="bossBlocks"></div>
+            <div class="data-meta" id="dataMeta"></div>
+            <div class="data-progress">
+                <div class="data-progress-inner" id="dataProgress"></div>
+            </div>
         </div>
     </div>
 
     <div class="gallery-container">
-        <div class="gallery-title">BOSS点位区域</div>
-        <div class="gallery-grid" id="galleryGrid"></div>
+        <div class="gallery-title">BOSS点位区域
+            <span class="collapse-btn">▼</span>
+        </div>
+        <div class="content-container">
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </div>
     </div>
 
     <div class="locations-container">
-        <div class="locations-title">BOSS二手情报</div>
-        <div class="locations-tabs" id="locationsTabs"></div>
-        <div class="locations-content" id="locationsContent"></div>
+        <div class="locations-title">BOSS二手情报
+            <span class="collapse-btn">▼</span>
+        </div>
+        <div class="content-container">
+            <div class="locations-tabs" id="locationsTabs"></div>
+            <div class="locations-content" id="locationsContent"></div>
+        </div>
     </div>
 
     <div class="donate-container">
@@ -1025,7 +1073,8 @@
         </div>
 
         <p class="donate-text">
-            感谢使用BOSS位置查看助手!如果这个网站对您有帮助，<br>
+            感谢使用BOSS位置查看助手!<br>
+            如果这个网站对您有帮助，<br>
             欢迎<span class="donate-highlight">扫描上方二维码</span>支持作者继续开发。<br>
             您的支持将帮助我持续改进、维护网站，并添加更多实用功能！<br>
             特别鸣谢：<span class="donate-highlight"> 谨、亚马逊神秘捕蛇男 </span>等多位大佬（供图）！
@@ -1043,23 +1092,39 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // ============= 折叠功能实现 =============
+            const collapseBtns = document.querySelectorAll('.collapse-btn');
+            collapseBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    
+                    const container = this.closest('.data-container, .gallery-container, .locations-container');
+                    const contentContainer = container.querySelector('.content-container');
+                    
+                    contentContainer.classList.toggle('collapsed');
+                    this.classList.toggle('collapsed');
+                });
+            });
+
             // ============= 鹦鹉语录功能 =============
             const quotes = [
-                "诚挚感谢: 阁楼微光、yizzz4等大佬友情赞助!!!",
+                "诚挚感谢<yizzz4>鱼友赞助!!!",
+                "诚挚感谢<阁楼微光>鱼友赞助!!!",
+                "诚挚感谢<眼皮抽筋>鱼友赞助!!!",
                 "能在此相伴实属有幸。",
-                "所有钓鱼佬都爱吹牛，除你和我——但说真的，我对你都有点怀疑。",
+                "所有钓鱼佬都爱吹牛，除你和我➔但说真的，我对你都有点怀疑。",
                 "你能像电影里那样让船漂移吗？",
                 "你是不是也常忘了自己为啥来这儿？",
-                "猜到我接下来要说啥吗？——我敬你三分。真的。",
+                "猜到我接下来要说啥吗？➔我敬你三分。真的。",
                 "没发现你在和鹦鹉说话？怕不是个大冤种！",
                 "这情绪起伏像极了采蘑菇时的心跳过山车！",
                 "富豪有心理医生，咱们普通人？唯有钓鱼解千愁！",
-                "授人以鱼管饱一天，授人以渔？——就等着看他在船上醉整天吧！",
+                "授人以鱼管饱一天，授人以渔？➔就等着看他在船上醉整天吧！",
                 "憋气30秒小菜一碟!",
                 "最近迷上《恐龙公园》神作，疯狂安利！",
                 "找到大鱼老巢的地方，必有掠食者蹲守。",
                 "遇见<Jay>真是太好啦。",
-                "最爱随便甩竿等惊喜——愿者上钩才刺激！",
+                "最爱随便甩竿等惊喜➔愿者上钩才刺激！",
                 "今天钓鱼佬扎堆，鱼怕不是要咬疯了！",
                 "这儿木头也太多了伐？！",
                 "湖里最吓人的是什么？水里突然碰你腿的东西，绝对是水怪！",
@@ -1072,22 +1137,22 @@
                 "见过帝王蟹吗？夜间限定捕捞！",
                 "搏战鲑鱼要等到黄昏时分",
                 "想看海象？东北角特定岛屿蹲守",
-                "法定禁止弄醒熊自拍——好笑在真有人干过！",
+                "法定禁止弄醒熊自拍➔好笑在真有人干过！",
                 "Alaska源自原住民语Alyeska,意为'伟大国度'",
                 "大嘴杜父鱼仅夜间上钩",
                 "澳洲80%动物都是特有物种",
                 "考拉日均睡20小时,慕了",
                 "鳄鱼就爱暖和的岩石海岸",
-                "大堡礁——地球最大生态系统！",
+                "大堡礁➔地球最大生态系统！",
                 "鲨鱼水域藏了什么鱼种？还不去探探！",
                 "儒艮看着圆滚滚，其实浑身腱子肉！",
                 "在澳大利亚的我们，现在算不算'脚朝上'?",
-                "官方认证！苏格兰国兽竟是——独角兽！",
+                "官方认证！苏格兰国兽竟是➔独角兽！",
                 "见过苏格兰人扔木杆吗？人家那可是正经比赛！",
                 "巨型墨鱼只在夜间出没",
                 "珊瑚礁区能找到昆士兰石斑鱼",
                 "泰国的稻田生态系统滋养着特有淡水鱼",
-                "湄公巨鲶——全球最大的淡水鱼王之一",
+                "湄公巨鲶➔全球最大的淡水鱼王之一",
                 "泰国坐拥850种淡水鱼,生物宝库!",
                 "尼斯湖水怪？史前巨兽还是变异鳗？您猜~",
                 "千湖之国(他们管湖叫Loch!),鱼群多到数不清！",
@@ -1096,7 +1161,7 @@
                 "⚠️避开污染水接触！护具要穿牢！生物勿惊扰！",
                 "变异的只是外表，生灵仍守本心",
                 "泡过这水的人最后说：'你绝对想不到，这味道像...咳咳'",
-                "此地生机勃勃——直到爆炸改写一切",
+                "此地生机勃勃➔直到爆炸改写一切",
                 "发光水痕=发光生物标记",
                 "钓变异鱼需特殊技巧"
             ];
@@ -1170,7 +1235,7 @@
                     typingTimer = setTimeout(typeWriter, 100); // 每个字符100ms
                 } else {
                     // 当前句子打字完成
-                    setTimeout(nextQuote, 20000); // 10秒后显示下一句
+                    setTimeout(nextQuote, 20000); // 20秒后显示下一句
                 }
             }
 
