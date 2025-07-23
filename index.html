@@ -1275,8 +1275,8 @@
                 const now = new Date();
                 const hour = now.getHours();
 
-                // 20:00-次日6:00为夜间模式
-                if (hour >= 20 || hour < 6) {
+                // 20:00-次日4:00为夜间模式
+                if (hour >= 20 || hour < 4) {
                     document.body.classList.add('night-mode');
                 } else {
                     document.body.classList.remove('night-mode');
